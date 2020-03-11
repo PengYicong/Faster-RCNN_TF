@@ -131,12 +131,12 @@ Tensorflow Version 1.11.0
     	and can not be parsed and concatenate with actual weights path by test_net.py
     	The log file shows that the model weights file is saved to the /output folder
 
-    	Wrote snapshot to: /home/boot/ming/projects/Faster-RCNN_TF /output/faster_rcnn_end2end/voc_2007_trainval/VGGnet_fast_rcnn_iter_200.ckpt
+    	Wrote snapshot to: /home/boot/username/projects/Faster-RCNN_TF /output/faster_rcnn_end2end/voc_2007_trainval/VGGnet_fast_rcnn_iter_200.ckpt
 		done solving
 
 		while the --weights argument passed to test_net.py is the project's root directory
 
-    	+ python ./tools/test_net.py --device gpu --device_id 0 --weights /home/boot/ming/projects/Faster-RCNN_TF --imdb voc_2007_test --cfg experiments/cfgs/faster_rcnn_end2end.yml --network VGGnet_test
+    	+ python ./tools/test_net.py --device gpu --device_id 0 --weights /home/boot/username/projects/Faster-RCNN_TF --imdb voc_2007_test --cfg experiments/cfgs/faster_rcnn_end2end.yml --network VGGnet_test
 
     	the arguments are designated by /experiments/scripts/faster_rcnn_end2end.sh and white space are interpreted as a seperator for arguements 
     	set +x

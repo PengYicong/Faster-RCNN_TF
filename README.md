@@ -3,6 +3,13 @@
 This is an experimental Tensorflow implementation of Faster RCNN - a convnet for object detection with a region proposal network.
 For details about R-CNN please refer to the paper [Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](http://arxiv.org/pdf/1506.01497v3.pdf) by Shaoqing Ren, Kaiming He, Ross Girshick, Jian Sun.
 
+### Disclaimer
+The tensorflow adaption of Faster-RCNN is originally done by smallcorgi(see: [smallcorgi/Faster-RCNN_TF](https://github.com/smallcorgi/Faster-RCNN_TF)).
+The above version is written in Python2
+This is a Python3 version of the project with various modifications so that it can run properly in Ubuntu16 with
+Python 3.6.1 Tensorflow 1.11.0 and CUDA 9.0 installed
+Along with the project there is a DEBUG_HISTORY.txt file which records the modifications and the debug process.
+DataPreparation.txt shows the data file requirements for this project to run.
 
 ### Requirements: software
 
@@ -120,4 +127,6 @@ The demo performs detection using a VGG16 network trained for detection on PASCA
 [Faster R-CNN caffe version](https://github.com/rbgirshick/py-faster-rcnn)
 
 [A tensorflow implementation of SubCNN (working progress)](https://github.com/yuxng/SubCNN_TF)
+
+[Faster-RCNN_TF by smallcorgi](https://github.com/smallcorgi/Faster-RCNN_TF)
 
