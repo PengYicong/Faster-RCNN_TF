@@ -1,0 +1,8 @@
+Data Preparation
+1. Faster-RCNN_TF/VGGnet_fast_rcnn_iter_70000.ckpt
+2. Faster-RCNN_TF/data/pretrain_model/VGG_imagenet.npy
+3. Faster-RCNN_TF/data/VOCdevkit2007
+	create_segmentations_from_detections.m  example_layout.m     viewanno.m
+	devkit_doc.pdf                          example_segmenter.m  viewdet.m
+	example_classifier.m                    local/                VOC2007/
+	example_detector.m                      results/              VOCcode/

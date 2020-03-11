@@ -1,0 +1,351 @@
++ echo Logging output to experiments/logs/faster_rcnn_end2end_VGG16_.txt.2020-03-11_08-24-55
+Logging output to experiments/logs/faster_rcnn_end2end_VGG16_.txt.2020-03-11_08-24-55
++ python ./tools/train_net.py --device gpu --device_id 0 --weights data/pretrain_model/VGG_imagenet.npy --imdb voc_2007_trainval --iters 200 --cfg experiments/cfgs/faster_rcnn_end2end.yml --network VGGnet_train
+voc_2007_train
+voc_2007_val
+voc_2007_trainval
+voc_2007_test
+kitti_train
+kitti_val
+kitti_trainval
+kitti_test
+nthu_71
+nthu_370
+Called with args:
+Namespace(cfg_file='experiments/cfgs/faster_rcnn_end2end.yml', device='gpu', device_id=0, imdb_name='voc_2007_trainval', max_iters=200, network_name='VGGnet_train', pretrained_model='data/pretrain_model/VGG_imagenet.npy', randomize=False, set_cfgs=None, solver=None)
+Using config:
+{'DATA_DIR': '/home/boot/ming/projects/Faster-RCNN_TF /data',
+ 'DEDUP_BOXES': 0.0625,
+ 'EPS': 1e-14,
+ 'EXP_DIR': 'faster_rcnn_end2end',
+ 'GPU_ID': 0,
+ 'IS_MULTISCALE': False,
+ 'MATLAB': 'matlab',
+ 'MODELS_DIR': '/home/boot/ming/projects/Faster-RCNN_TF /models/pascal_voc',
+ 'PIXEL_MEANS': array([[[102.9801, 115.9465, 122.7717]]]),
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/boot/ming/projects/Faster-RCNN_TF ',
+ 'TEST': {'BBOX_REG': True,
+          'DEBUG_TIMELINE': False,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'selective_search',
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': True,
+           'BATCH_SIZE': 128,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'DEBUG_TIMELINE': False,
+           'DISPLAY': 10,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.001,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_INFIX': '',
+           'SNAPSHOT_ITERS': 200,
+           'SNAPSHOT_PREFIX': 'VGGnet_fast_rcnn',
+           'STEPSIZE': 200,
+           'USE_FLIPPED': True,
+           'USE_PREFETCH': False},
+ 'USE_GPU_NMS': True}
+<bound method imdb.default_roidb of <datasets.pascal_voc.pascal_voc object at 0x7f0f22c69748>>
+Loaded dataset `voc_2007_trainval` for training
+Appending horizontally-flipped training examples...
+voc_2007_trainval gt roidb loaded from /home/boot/ming/projects/Faster-RCNN_TF /data/cache/voc_2007_trainval_gt_roidb.pkl
+done
+Preparing training data...
+done
+Output will be saved to `/home/boot/ming/projects/Faster-RCNN_TF /output/faster_rcnn_end2end/voc_2007_trainval`
+/gpu:0
+Tensor("Placeholder:0", shape=(?, ?, ?, 3), dtype=float32)
+Tensor("conv5_3/conv5_3:0", shape=(?, ?, ?, 512), dtype=float32)
+Tensor("rpn_cls_score/rpn_cls_score:0", shape=(?, ?, ?, 18), dtype=float32)
+Tensor("Placeholder_2:0", shape=(?, 5), dtype=float32)
+Tensor("Placeholder_1:0", shape=(?, 3), dtype=float32)
+Tensor("Placeholder:0", shape=(?, ?, ?, 3), dtype=float32)
+Tensor("rpn_conv/3x3/rpn_conv/3x3:0", shape=(?, ?, ?, 512), dtype=float32)
+Tensor("rpn_cls_score/rpn_cls_score:0", shape=(?, ?, ?, 18), dtype=float32)
+Tensor("rpn_cls_prob:0", shape=(?, ?, ?, ?), dtype=float32)
+Tensor("rpn_cls_prob_reshape:0", shape=(?, ?, ?, 18), dtype=float32)
+Tensor("rpn_bbox_pred/rpn_bbox_pred:0", shape=(?, ?, ?, 36), dtype=float32)
+Tensor("Placeholder_1:0", shape=(?, 3), dtype=float32)
+Tensor("rpn_rois:0", shape=(?, 5), dtype=float32)
+Tensor("Placeholder_2:0", shape=(?, 5), dtype=float32)
+Tensor("conv5_3/conv5_3:0", shape=(?, ?, ?, 512), dtype=float32)
+(<tf.Tensor 'roi-data/rois:0' shape=(?, 5) dtype=float32>, <tf.Tensor 'roi-data/Cast:0' shape=<unknown> dtype=int32>, <tf.Tensor 'roi-data/PyFunc:2' shape=<unknown> dtype=float32>, <tf.Tensor 'roi-data/PyFunc:3' shape=<unknown> dtype=float32>, <tf.Tensor 'roi-data/PyFunc:4' shape=<unknown> dtype=float32>)
+[<tf.Tensor 'conv5_3/conv5_3:0' shape=(?, ?, ?, 512) dtype=float32>, <tf.Tensor 'roi-data/rois:0' shape=(?, 5) dtype=float32>]
+Tensor("drop7/mul:0", shape=(?, 4096), dtype=float32)
+Use network `VGGnet_train` in training
+Filtered 0 roidb entries: 10022 -> 10022
+2020-03-11 08:24:58.375215: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-03-11 08:24:58.467429: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:964] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2020-03-11 08:24:58.467795: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1411] Found device 0 with properties: 
+name: GeForce GTX 1080 Ti major: 6 minor: 1 memoryClockRate(GHz): 1.6325
+pciBusID: 0000:01:00.0
+totalMemory: 10.91GiB freeMemory: 10.09GiB
+2020-03-11 08:24:58.467810: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1490] Adding visible gpu devices: 0
+2020-03-11 08:24:58.658829: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-03-11 08:24:58.658851: I tensorflow/core/common_runtime/gpu/gpu_device.cc:977]      0 
+2020-03-11 08:24:58.658857: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990] 0:   N 
+2020-03-11 08:24:58.659014: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1103] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 9757 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1080 Ti, pci bus id: 0000:01:00.0, compute capability: 6.1)
+Computing bounding-box regression targets...
+bbox target means:
+[[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]]
+[0. 0. 0. 0.]
+bbox target stdevs:
+[[0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]]
+[0.1 0.1 0.2 0.2]
+Normalizing targets
+done
+Solving...
+/home/boot/anaconda3/lib/python3.6/site-packages/tensorflow/python/ops/gradients_impl.py:108: UserWarning: Converting sparse IndexedSlices to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  "Converting sparse IndexedSlices to a dense Tensor of unknown shape. "
+2020-03-11 08:25:01.270705: W tensorflow/core/framework/allocator.cc:113] Allocation of 411041792 exceeds 10% of system memory.
+2020-03-11 08:25:01.440153: W tensorflow/core/framework/allocator.cc:113] Allocation of 411041792 exceeds 10% of system memory.
+2020-03-11 08:25:01.615809: W tensorflow/core/framework/allocator.cc:113] Allocation of 411041792 exceeds 10% of system memory.
+2020-03-11 08:25:01.790240: W tensorflow/core/framework/allocator.cc:113] Allocation of 411041792 exceeds 10% of system memory.
+2020-03-11 08:25:02.099141: W tensorflow/core/framework/allocator.cc:113] Allocation of 411041792 exceeds 10% of system memory.
+Loading pretrained model weights from data/pretrain_model/VGG_imagenet.npy
+assign pretrain model weights to conv5_1
+assign pretrain model biases to conv5_1
+assign pretrain model weights to fc6
+assign pretrain model biases to fc6
+assign pretrain model weights to conv5_3
+assign pretrain model biases to conv5_3
+assign pretrain model weights to conv5_2
+assign pretrain model biases to conv5_2
+ignore fc8
+ignore fc8
+assign pretrain model weights to fc7
+assign pretrain model biases to fc7
+assign pretrain model weights to conv4_1
+assign pretrain model biases to conv4_1
+assign pretrain model weights to conv4_2
+assign pretrain model biases to conv4_2
+assign pretrain model weights to conv4_3
+assign pretrain model biases to conv4_3
+assign pretrain model weights to conv3_3
+assign pretrain model biases to conv3_3
+assign pretrain model weights to conv3_2
+assign pretrain model biases to conv3_2
+assign pretrain model weights to conv3_1
+assign pretrain model biases to conv3_1
+assign pretrain model weights to conv1_1
+assign pretrain model biases to conv1_1
+assign pretrain model weights to conv1_2
+assign pretrain model biases to conv1_2
+assign pretrain model weights to conv2_2
+assign pretrain model biases to conv2_2
+assign pretrain model weights to conv2_1
+assign pretrain model biases to conv2_1
+iter: 10 / 200, total loss: 1.3755, rpn_loss_cls: 0.4570, rpn_loss_box: 0.0018, loss_cls: 0.5935, loss_box: 0.3231, lr: 0.001000
+speed: 0.405s / iter
+iter: 20 / 200, total loss: 2.1401, rpn_loss_cls: 0.3107, rpn_loss_box: 0.0584, loss_cls: 1.0448, loss_box: 0.7263, lr: 0.001000
+speed: 0.376s / iter
+iter: 30 / 200, total loss: 0.6227, rpn_loss_cls: 0.1882, rpn_loss_box: 0.0442, loss_cls: 0.2681, loss_box: 0.1222, lr: 0.001000
+speed: 0.383s / iter
+iter: 40 / 200, total loss: 0.6533, rpn_loss_cls: 0.4593, rpn_loss_box: 0.1438, loss_cls: 0.0501, loss_box: 0.0001, lr: 0.001000
+speed: 0.354s / iter
+iter: 50 / 200, total loss: 1.3878, rpn_loss_cls: 0.2918, rpn_loss_box: 0.0207, loss_cls: 0.7511, loss_box: 0.3241, lr: 0.001000
+speed: 0.340s / iter
+iter: 60 / 200, total loss: 0.8243, rpn_loss_cls: 0.3113, rpn_loss_box: 0.0454, loss_cls: 0.3535, loss_box: 0.1140, lr: 0.001000
+speed: 0.325s / iter
+iter: 70 / 200, total loss: 0.8967, rpn_loss_cls: 0.3144, rpn_loss_box: 0.0042, loss_cls: 0.4477, loss_box: 0.1305, lr: 0.001000
+speed: 0.313s / iter
+iter: 80 / 200, total loss: 1.9327, rpn_loss_cls: 0.0990, rpn_loss_box: 0.1044, loss_cls: 1.0793, loss_box: 0.6499, lr: 0.001000
+speed: 0.304s / iter
+iter: 90 / 200, total loss: 2.8584, rpn_loss_cls: 1.1092, rpn_loss_box: 0.2008, loss_cls: 1.1703, loss_box: 0.3780, lr: 0.001000
+speed: 0.313s / iter
+iter: 100 / 200, total loss: 1.7013, rpn_loss_cls: 0.1990, rpn_loss_box: 0.0641, loss_cls: 0.7914, loss_box: 0.6468, lr: 0.001000
+speed: 0.299s / iter
+iter: 110 / 200, total loss: 1.9486, rpn_loss_cls: 0.8332, rpn_loss_box: 0.1621, loss_cls: 0.6951, loss_box: 0.2582, lr: 0.001000
+speed: 0.311s / iter
+iter: 120 / 200, total loss: 2.2366, rpn_loss_cls: 0.5317, rpn_loss_box: 0.2620, loss_cls: 0.8152, loss_box: 0.6276, lr: 0.001000
+speed: 0.311s / iter
+iter: 130 / 200, total loss: 1.3795, rpn_loss_cls: 0.1770, rpn_loss_box: 0.0243, loss_cls: 0.5216, loss_box: 0.6565, lr: 0.001000
+speed: 0.306s / iter
+iter: 140 / 200, total loss: 1.1262, rpn_loss_cls: 0.1019, rpn_loss_box: 0.0681, loss_cls: 0.6242, loss_box: 0.3319, lr: 0.001000
+speed: 0.291s / iter
+iter: 150 / 200, total loss: 2.0348, rpn_loss_cls: 0.1893, rpn_loss_box: 0.0402, loss_cls: 1.1444, loss_box: 0.6608, lr: 0.001000
+speed: 0.290s / iter
+iter: 160 / 200, total loss: 0.9086, rpn_loss_cls: 0.2092, rpn_loss_box: 0.0143, loss_cls: 0.4581, loss_box: 0.2270, lr: 0.001000
+speed: 0.286s / iter
+iter: 170 / 200, total loss: 0.8855, rpn_loss_cls: 0.1498, rpn_loss_box: 0.0083, loss_cls: 0.5241, loss_box: 0.2032, lr: 0.001000
+speed: 0.283s / iter
+iter: 180 / 200, total loss: 2.0273, rpn_loss_cls: 0.8594, rpn_loss_box: 0.4297, loss_cls: 0.6593, loss_box: 0.0789, lr: 0.001000
+speed: 0.282s / iter
+iter: 190 / 200, total loss: 3.1956, rpn_loss_cls: 0.9999, rpn_loss_box: 0.2662, loss_cls: 1.3566, loss_box: 0.5730, lr: 0.001000
+speed: 0.272s / iter
+iter: 200 / 200, total loss: 3.7640, rpn_loss_cls: 0.7693, rpn_loss_box: 0.4166, loss_cls: 2.0925, loss_box: 0.4855, lr: 0.000100
+speed: 0.278s / iter
+WARNING:tensorflow:*******************************************************
+WARNING:tensorflow:TensorFlow's V1 checkpoint format has been deprecated.
+WARNING:tensorflow:Consider switching to the more efficient V2 format:
+WARNING:tensorflow:   `tf.train.Saver(write_version=tf.train.SaverDef.V2)`
+WARNING:tensorflow:now on by default.
+WARNING:tensorflow:*******************************************************
+Wrote snapshot to: /home/boot/ming/projects/Faster-RCNN_TF /output/faster_rcnn_end2end/voc_2007_trainval/VGGnet_fast_rcnn_iter_200.ckpt
+done solving
+
+real	1m15.741s
+user	0m55.624s
+sys	0m17.680s
++ set +x
++ python ./tools/test_net.py --device gpu --device_id 0 --weights /home/boot/ming/projects/Faster-RCNN_TF --imdb voc_2007_test --cfg experiments/cfgs/faster_rcnn_end2end.yml --network VGGnet_test
+voc_2007_train
+voc_2007_val
+voc_2007_trainval
+voc_2007_test
+kitti_train
+kitti_val
+kitti_trainval
+kitti_test
+nthu_71
+nthu_370
+Called with args:
+Namespace(cfg_file='experiments/cfgs/faster_rcnn_end2end.yml', comp_mode=False, device='gpu', device_id=0, imdb_name='voc_2007_test', model='/home/boot/ming/projects/Faster-RCNN_TF', network_name='VGGnet_test', prototxt=None, wait=True)
+Using config:
+{'DATA_DIR': '/home/boot/ming/projects/Faster-RCNN_TF /data',
+ 'DEDUP_BOXES': 0.0625,
+ 'EPS': 1e-14,
+ 'EXP_DIR': 'faster_rcnn_end2end',
+ 'GPU_ID': 0,
+ 'IS_MULTISCALE': False,
+ 'MATLAB': 'matlab',
+ 'MODELS_DIR': '/home/boot/ming/projects/Faster-RCNN_TF /models/pascal_voc',
+ 'PIXEL_MEANS': array([[[102.9801, 115.9465, 122.7717]]]),
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/boot/ming/projects/Faster-RCNN_TF ',
+ 'TEST': {'BBOX_REG': True,
+          'DEBUG_TIMELINE': False,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'selective_search',
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': True,
+           'BATCH_SIZE': 128,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'DEBUG_TIMELINE': False,
+           'DISPLAY': 10,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.001,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_INFIX': '',
+           'SNAPSHOT_ITERS': 200,
+           'SNAPSHOT_PREFIX': 'VGGnet_fast_rcnn',
+           'STEPSIZE': 200,
+           'USE_FLIPPED': True,
+           'USE_PREFETCH': False},
+ 'USE_GPU_NMS': True}
+Waiting for /home/boot/ming/projects/Faster-RCNN_TF to exist...
+Waiting for /home/boot/ming/projects/Faster-RCNN_TF to exist...
+Waiting for /home/boot/ming/projects/Faster-RCNN_TF to exist...
+Waiting for /home/boot/ming/projects/Faster-RCNN_TF to exist...
+Waiting for /home/boot/ming/projects/Faster-RCNN_TF to exist...
+Waiting for /home/boot/ming/projects/Faster-RCNN_TF to exist...
+Waiting for /home/boot/ming/projects/Faster-RCNN_TF to exist...
+Waiting for /home/boot/ming/projects/Faster-RCNN_TF to exist...
+Waiting for /home/boot/ming/projects/Faster-RCNN_TF to exist...
+Waiting for /home/boot/ming/projects/Faster-RCNN_TF to exist...

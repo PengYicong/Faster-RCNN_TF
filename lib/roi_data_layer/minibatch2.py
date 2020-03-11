@@ -321,7 +321,7 @@ def _vis_minibatch(im_blob, rois_blob, labels_blob, overlaps, sublabels_blob, vi
         cls = labels_blob[i]
         subcls = sublabels_blob[i]
         plt.imshow(im)
-        print 'class: ', cls, ' subclass: ', subcls, ' overlap: ', overlaps[i]
+        print('class: ', cls, ' subclass: ', subcls, ' overlap: ', overlaps[i])
 
         start = 3 * cls
         end = start + 3

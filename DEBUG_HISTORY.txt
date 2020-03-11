@@ -1,0 +1,162 @@
+#Faster R-CNN smallcorgi version debug log
+OS: Ubuntu
+Python Version 3.6.1
+Tensorflow Version 1.11.0
+
+1. General Error arise from converting Python2 to Python3
+	1.1 print is a function in Python3
+		print '' -> print('')
+		AttributeError: 'NoneType' object has no attribute 'format'
+		missing parenthesis, chage
+		print ('Detection took {:.3f}s for '
+           '{:d} object proposals').format(timer.total_time, boxes.shape[0])
+        ->
+		print (('Detection took {:.3f}s for '
+           '{:d} object proposals').format(timer.total_time, boxes.shape[0]))
+	1.2 xrange() not defined
+		Python3 uses range() function instead, so xrange() -> range()
+	1.3 module not find cPickle
+		Python3 has built in pickle module, so import cPickle -> import pickle as cPickle
+		without changing various occurrences of cPickle in code
+	1.4 Type error: unsupported operand type(s) for /: 'Dimension' and 'int'
+		c_i = input.get_shape()[-1] in Python2 is of type Dimension
+		convert to int type: c_i = int(input.get_shape()[-1])
+	1.5 NameError: name 'basestring' is not defined
+		basestring->str
+	1.6 AttributeError: 'EasyDict' object has no attribute 'iteritems'
+		iteritems are now items
+		iteritems -> items
+	1.7 AttributeError: 'EasyDict' object has no attribute 'has_key'
+		Python3 removed the has_key method in dict class
+		if not b.has_key(k): -> if k not in b:
+		if not __sets.has_key(name): -> if name not in __sets:
+	1.8 You may need to pass the encoding= option to numpy.load
+		Python2 has the default encoding of ASCII, Python3 has the default encoding of UTF-8
+		so modify the network.py file by changing
+		data_dict = np.load(data_path).item()
+		->
+		data_dict = np.load(data_path, encoding="latin1").item()
+	1.9 TypeError: 'float' object cannot be interpreted as an integer
+		numpy version incompatibility
+		in lib/rpn_msr/proposal_target_layer_tf.py change
+		if bg_inds.size > 0:
+        	bg_inds = npr.choice(bg_inds, size=bg_rois_per_this_image, replace=False)
+        ->
+		if bg_inds.size > 0:
+        	bg_inds = npr.choice(bg_inds, size=int(bg_rois_per_this_image), replace=False)
+2. Project Related
+	2.1 in make lib: modify make.sh
+		error undefined symbol:_ZTIN10tensorflow8OpKernelE occured during runtime
+		1)add TF_LIB=$(python -c 'import tensorflow as tf; print(tf.sysconfig.get_lib())')
+		2)add additional parameters to g++ command
+		3)make again
+		4)the modification are as follows:
+		if [ -d "$CUDA_PATH" ]; then
+			nvcc -std=c++11 -c -o roi_pooling_op.cu.o roi_pooling_op_gpu.cu.cc \
+				-I $TF_INC -D GOOGLE_CUDA=1 -x cu -Xcompiler -fPIC $CXXFLAGS \
+				-arch=sm_37
+
+			g++ -std=c++11 -shared -o roi_pooling.so roi_pooling_op.cc \
+				roi_pooling_op.cu.o -I $TF_INC  -D GOOGLE_CUDA=1 -fPIC $CXXFLAGS \
+				-lcudart -L $CUDA_PATH/lib64
+		else
+			g++ -std=c++11 -shared -o roi_pooling.so roi_pooling_op.cc \
+				-I $TF_INC -fPIC $CXXFLAGS
+		fi
+
+		# add -D_GLIBCXX_USE_CXX11_ABI=0 and $TF_LIB -ltensorflow_framework ------->
+
+		if [ -d "$CUDA_PATH" ]; then
+			nvcc -std=c++11 -c -o roi_pooling_op.cu.o roi_pooling_op_gpu.cu.cc \
+				-I $TF_INC -D GOOGLE_CUDA=1 -x cu -Xcompiler -fPIC $CXXFLAGS \
+				-arch=sm_37
+
+			g++ -std=c++11 -shared -o roi_pooling.so roi_pooling_op.cc -D_GLIBCXX_USE_CXX11_ABI=0\
+				roi_pooling_op.cu.o -I $TF_INC -L $TF_LIB -ltensorflow_framework -D GOOGLE_CUDA=1 -fPIC $CXXFLAGS \
+				-lcudart -L $CUDA_PATH/lib64
+		else
+			g++ -std=c++11 -shared -o roi_pooling.so roi_pooling_op.cc -D_GLIBCXX_USE_CXX11_ABI=0\
+				-I $TF_INC -L $TF_LIB -ltensorflow_framework -fPIC $CXXFLAGS
+		fi
+	2.2 ModuleNotFoundError: No module named 'roi_pooling_op'/'generate_anchors'
+		this is an import error, need to specify package name (directory name containing the module) first
+		import roi_poolint_op -> import roi_pooling_layer.roi_pooling_op as roi_pooling_op
+		*note that the as roi_pooling_op is important to keeping the naming scheme consistent in the following codes.
+		from generate_anchors import generate_anchors -> from rpn_msr.generate_anchors import generate_anchors
+	2.3 TypeError:__init__ returned non-int (type NoneType)
+		error raised due to tensorflow version incompatibility
+		need to modify file roi_pooling_op.cc under lib/roi_pooling_layer/
+		add
+		#include "tensorflow/core/framework/shape_inference.h"
+		then modity the REGISTER_OP("RoiPool") section
+		change .Output("argmax: int32"); ->
+		.Output("argmax: int32")
+		.SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
+      		//https://github.com/tensorflow/.../core/framework/shape_inference.h
+      		int pooled_height;
+      		int pooled_width;
+      		c->GetAttr("pooled_height", &pooled_height);
+      		c->GetAttr("pooled_width", &pooled_width);
+      		auto pooled_height_h = c->MakeDim(pooled_height);
+      		auto pooled_width_h = c->MakeDim(pooled_width);
+
+      		auto output_shape = c->MakeShape({ c->Dim(c->input(1), 0), pooled_height_h, pooled_width_h, c->Dim(c->input(0), 3) });
+      		c->set_output(0, output_shape);
+      		return Status::OK();
+    		});
+    		since it modified the file under /lib which is used for make
+    		run make command again to update the project
+    2.4 Unknown: KeyError: b'TEST'
+    	for error in file lib/networks/VGG_test.py this is a decode error
+    	add # -*- coding:utf-8 -*- at top
+    	for error in lib/rpn_msr/proposal_layer_tf.py
+    	add cfg_key = cfg_key.decode('utf-8') before
+    		pre_nms_topN  = cfg[cfg_key].RPN_PRE_NMS_TOP_N
+    2.5 grep: experiments/logs/faster_rcnn_end2end_VGG16_.txt no such file or directory
+    	there is no directory named 'logs' originally in this project
+    	create a new folder and name it 'logs'
+    	* Note that this must be done before fixing bug 2.6
+    2.6 test_net.py: error: argument --weights: expected one argument
+    	in lib/fast_rcnn/train.py 
+    	# add
+    	from tensorflow.core.protobuf import saver_pb2
+    	# change
+    	saver = tf.train.Saver(max_to_keep=100)
+    	->
+    	saver = tf.train.Saver(max_to_keep=100, write_version=saver_pb2.SaveDef.V1)
+    	* this bug need to be fixed or bug 2.7 will occur
+    	* this modification will induce a warning saying the V1 saving scheme is deprecated but it's OK
+    2.7 waiting for /rootdirectory or /filename.ckpt to exist
+    	this is a grep induced error when the folder name has a trailing white space
+    	and can not be parsed and concatenate with actual weights path by test_net.py
+    	The log file shows that the model weights file is saved to the /output folder
+
+    	Wrote snapshot to: /home/boot/ming/projects/Faster-RCNN_TF /output/faster_rcnn_end2end/voc_2007_trainval/VGGnet_fast_rcnn_iter_200.ckpt
+		done solving
+
+		while the --weights argument passed to test_net.py is the project's root directory
+
+    	+ python ./tools/test_net.py --device gpu --device_id 0 --weights /home/boot/ming/projects/Faster-RCNN_TF --imdb voc_2007_test --cfg experiments/cfgs/faster_rcnn_end2end.yml --network VGGnet_test
+
+    	the arguments are designated by /experiments/scripts/faster_rcnn_end2end.sh and white space are interpreted as a seperator for arguements 
+    	set +x
+		NET_FINAL=`grep -B 1 "done solving" ${LOG} | grep "Wrote snapshot" | awk '{print $4}'`
+		set -x
+
+		time python ./tools/test_net.py --device ${DEV} --device_id ${DEV_ID} \
+  		--weights ${NET_FINAL} \
+  		--imdb ${TEST_IMDB} \
+  		--cfg experiments/cfgs/faster_rcnn_end2end.yml \
+  		--network VGGnet_test \
+  		${EXTRA_ARGS}
+
+  		In the /filename.ckpt the actual saved model name will be VGGnet_fast_rcnn_iter_200.ckpt.data.000000_of_000001 like
+  		while the program search for VGGnet_fast_rcnn_iter_200.ckpt
+  		this may due to the name of the saved model is different when using V1 and V2
+  		* another workaround can be modify the faster_rcnn_end2end.sh file to change the weights parameter value to the correspondiing name
+  		  
+
+
+
+
+

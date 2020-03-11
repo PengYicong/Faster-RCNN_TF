@@ -45,16 +45,16 @@ class Network(object):
         if data_path.endswith('.ckpt'):
             saver.restore(session, data_path)
         else:
-            data_dict = np.load(data_path).item()
+            data_dict = np.load(data_path, encoding="latin1").item()
             for key in data_dict:
                 with tf.variable_scope(key, reuse=True):
                     for subkey in data_dict[key]:
                         try:
                             var = tf.get_variable(subkey)
                             session.run(var.assign(data_dict[key][subkey]))
-                            print "assign pretrain model "+subkey+ " to "+key
+                            print("assign pretrain model "+subkey+ " to "+key)
                         except ValueError:
-                            print "ignore "+key
+                            print("ignore "+key)
                             if not ignore_missing:
 
                                 raise
@@ -63,12 +63,13 @@ class Network(object):
         assert len(args)!=0
         self.inputs = []
         for layer in args:
-            if isinstance(layer, basestring):
+            # replaced basestring with str
+            if isinstance(layer, str):
                 try:
                     layer = self.layers[layer]
-                    print layer
+                    print(layer)
                 except KeyError:
-                    print self.layers.keys()
+                    print(self.layers.keys())
                     raise KeyError('Unknown layer name fed: %s'%layer)
             self.inputs.append(layer)
         return self
@@ -77,7 +78,7 @@ class Network(object):
         try:
             layer = self.layers[layer]
         except KeyError:
-            print self.layers.keys()
+            print(self.layers.keys())
             raise KeyError('Unknown layer name fed: %s'%layer)
         return layer
 
@@ -94,7 +95,7 @@ class Network(object):
     @layer
     def conv(self, input, k_h, k_w, c_o, s_h, s_w, name, relu=True, padding=DEFAULT_PADDING, group=1, trainable=True):
         self.validate_padding(padding)
-        c_i = input.get_shape()[-1]
+        c_i = int(input.get_shape()[-1])
         assert c_i%group==0
         assert c_o%group==0
         convolve = lambda i, k: tf.nn.conv2d(i, k, [1, s_h, s_w, 1], padding=padding)
@@ -148,7 +149,7 @@ class Network(object):
         if isinstance(input[1], tuple):
             input[1] = input[1][0]
 
-        print input
+        print(input)
         return roi_pool_op.roi_pool(input[0], input[1],
                                     pooled_height,
                                     pooled_width,

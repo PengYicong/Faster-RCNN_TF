@@ -1,0 +1,404 @@
++ echo Logging output to experiments/logs/faster_rcnn_end2end_VGG16_.txt.2020-03-11_08-47-27
+Logging output to experiments/logs/faster_rcnn_end2end_VGG16_.txt.2020-03-11_08-47-27
++ python ./tools/train_net.py --device gpu --device_id 0 --weights data/pretrain_model/VGG_imagenet.npy --imdb voc_2007_trainval --iters 200 --cfg experiments/cfgs/faster_rcnn_end2end.yml --network VGGnet_train
+voc_2007_train
+voc_2007_val
+voc_2007_trainval
+voc_2007_test
+kitti_train
+kitti_val
+kitti_trainval
+kitti_test
+nthu_71
+nthu_370
+Called with args:
+Namespace(cfg_file='experiments/cfgs/faster_rcnn_end2end.yml', device='gpu', device_id=0, imdb_name='voc_2007_trainval', max_iters=200, network_name='VGGnet_train', pretrained_model='data/pretrain_model/VGG_imagenet.npy', randomize=False, set_cfgs=None, solver=None)
+Using config:
+{'DATA_DIR': '/home/boot/ming/projects/Faster-RCNN_TF/data',
+ 'DEDUP_BOXES': 0.0625,
+ 'EPS': 1e-14,
+ 'EXP_DIR': 'faster_rcnn_end2end',
+ 'GPU_ID': 0,
+ 'IS_MULTISCALE': False,
+ 'MATLAB': 'matlab',
+ 'MODELS_DIR': '/home/boot/ming/projects/Faster-RCNN_TF/models/pascal_voc',
+ 'PIXEL_MEANS': array([[[102.9801, 115.9465, 122.7717]]]),
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/boot/ming/projects/Faster-RCNN_TF',
+ 'TEST': {'BBOX_REG': True,
+          'DEBUG_TIMELINE': False,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'selective_search',
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': True,
+           'BATCH_SIZE': 128,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'DEBUG_TIMELINE': False,
+           'DISPLAY': 10,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.001,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_INFIX': '',
+           'SNAPSHOT_ITERS': 200,
+           'SNAPSHOT_PREFIX': 'VGGnet_fast_rcnn',
+           'STEPSIZE': 200,
+           'USE_FLIPPED': True,
+           'USE_PREFETCH': False},
+ 'USE_GPU_NMS': True}
+<bound method imdb.default_roidb of <datasets.pascal_voc.pascal_voc object at 0x7fac31b51710>>
+Loaded dataset `voc_2007_trainval` for training
+Appending horizontally-flipped training examples...
+voc_2007_trainval gt roidb loaded from /home/boot/ming/projects/Faster-RCNN_TF/data/cache/voc_2007_trainval_gt_roidb.pkl
+done
+Preparing training data...
+done
+Output will be saved to `/home/boot/ming/projects/Faster-RCNN_TF/output/faster_rcnn_end2end/voc_2007_trainval`
+/gpu:0
+Tensor("Placeholder:0", shape=(?, ?, ?, 3), dtype=float32)
+Tensor("conv5_3/conv5_3:0", shape=(?, ?, ?, 512), dtype=float32)
+Tensor("rpn_cls_score/rpn_cls_score:0", shape=(?, ?, ?, 18), dtype=float32)
+Tensor("Placeholder_2:0", shape=(?, 5), dtype=float32)
+Tensor("Placeholder_1:0", shape=(?, 3), dtype=float32)
+Tensor("Placeholder:0", shape=(?, ?, ?, 3), dtype=float32)
+Tensor("rpn_conv/3x3/rpn_conv/3x3:0", shape=(?, ?, ?, 512), dtype=float32)
+Tensor("rpn_cls_score/rpn_cls_score:0", shape=(?, ?, ?, 18), dtype=float32)
+Tensor("rpn_cls_prob:0", shape=(?, ?, ?, ?), dtype=float32)
+Tensor("rpn_cls_prob_reshape:0", shape=(?, ?, ?, 18), dtype=float32)
+Tensor("rpn_bbox_pred/rpn_bbox_pred:0", shape=(?, ?, ?, 36), dtype=float32)
+Tensor("Placeholder_1:0", shape=(?, 3), dtype=float32)
+Tensor("rpn_rois:0", shape=(?, 5), dtype=float32)
+Tensor("Placeholder_2:0", shape=(?, 5), dtype=float32)
+Tensor("conv5_3/conv5_3:0", shape=(?, ?, ?, 512), dtype=float32)
+(<tf.Tensor 'roi-data/rois:0' shape=(?, 5) dtype=float32>, <tf.Tensor 'roi-data/Cast:0' shape=<unknown> dtype=int32>, <tf.Tensor 'roi-data/PyFunc:2' shape=<unknown> dtype=float32>, <tf.Tensor 'roi-data/PyFunc:3' shape=<unknown> dtype=float32>, <tf.Tensor 'roi-data/PyFunc:4' shape=<unknown> dtype=float32>)
+[<tf.Tensor 'conv5_3/conv5_3:0' shape=(?, ?, ?, 512) dtype=float32>, <tf.Tensor 'roi-data/rois:0' shape=(?, 5) dtype=float32>]
+Tensor("drop7/mul:0", shape=(?, 4096), dtype=float32)
+Use network `VGGnet_train` in training
+Filtered 0 roidb entries: 10022 -> 10022
+2020-03-11 08:47:29.869744: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-03-11 08:47:29.951250: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:964] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2020-03-11 08:47:29.951604: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1411] Found device 0 with properties: 
+name: GeForce GTX 1080 Ti major: 6 minor: 1 memoryClockRate(GHz): 1.6325
+pciBusID: 0000:01:00.0
+totalMemory: 10.91GiB freeMemory: 10.09GiB
+2020-03-11 08:47:29.951616: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1490] Adding visible gpu devices: 0
+2020-03-11 08:47:30.148826: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-03-11 08:47:30.148850: I tensorflow/core/common_runtime/gpu/gpu_device.cc:977]      0 
+2020-03-11 08:47:30.148856: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990] 0:   N 
+2020-03-11 08:47:30.149016: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1103] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 9757 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1080 Ti, pci bus id: 0000:01:00.0, compute capability: 6.1)
+Computing bounding-box regression targets...
+bbox target means:
+[[0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]
+ [0. 0. 0. 0.]]
+[0. 0. 0. 0.]
+bbox target stdevs:
+[[0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]
+ [0.1 0.1 0.2 0.2]]
+[0.1 0.1 0.2 0.2]
+Normalizing targets
+done
+Solving...
+/home/boot/anaconda3/lib/python3.6/site-packages/tensorflow/python/ops/gradients_impl.py:108: UserWarning: Converting sparse IndexedSlices to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  "Converting sparse IndexedSlices to a dense Tensor of unknown shape. "
+Loading pretrained model weights from data/pretrain_model/VGG_imagenet.npy
+assign pretrain model weights to conv5_1
+assign pretrain model biases to conv5_1
+assign pretrain model weights to fc6
+assign pretrain model biases to fc6
+assign pretrain model weights to conv5_3
+assign pretrain model biases to conv5_3
+assign pretrain model weights to conv5_2
+assign pretrain model biases to conv5_2
+ignore fc8
+ignore fc8
+assign pretrain model weights to fc7
+assign pretrain model biases to fc7
+assign pretrain model weights to conv4_1
+assign pretrain model biases to conv4_1
+assign pretrain model weights to conv4_2
+assign pretrain model biases to conv4_2
+assign pretrain model weights to conv4_3
+assign pretrain model biases to conv4_3
+assign pretrain model weights to conv3_3
+assign pretrain model biases to conv3_3
+assign pretrain model weights to conv3_2
+assign pretrain model biases to conv3_2
+assign pretrain model weights to conv3_1
+assign pretrain model biases to conv3_1
+assign pretrain model weights to conv1_1
+assign pretrain model biases to conv1_1
+assign pretrain model weights to conv1_2
+assign pretrain model biases to conv1_2
+assign pretrain model weights to conv2_2
+assign pretrain model biases to conv2_2
+assign pretrain model weights to conv2_1
+assign pretrain model biases to conv2_1
+iter: 10 / 200, total loss: 1.1820, rpn_loss_cls: 0.4347, rpn_loss_box: 0.0007, loss_cls: 0.4483, loss_box: 0.2983, lr: 0.001000
+speed: 0.407s / iter
+iter: 20 / 200, total loss: 2.0648, rpn_loss_cls: 0.3096, rpn_loss_box: 0.0489, loss_cls: 1.0764, loss_box: 0.6298, lr: 0.001000
+speed: 0.377s / iter
+iter: 30 / 200, total loss: 0.7088, rpn_loss_cls: 0.2647, rpn_loss_box: 0.0296, loss_cls: 0.2757, loss_box: 0.1388, lr: 0.001000
+speed: 0.384s / iter
+iter: 40 / 200, total loss: 0.7953, rpn_loss_cls: 0.4395, rpn_loss_box: 0.1470, loss_cls: 0.2086, loss_box: 0.0002, lr: 0.001000
+speed: 0.355s / iter
+iter: 50 / 200, total loss: 1.2168, rpn_loss_cls: 0.3267, rpn_loss_box: 0.0443, loss_cls: 0.6684, loss_box: 0.1775, lr: 0.001000
+speed: 0.341s / iter
+iter: 60 / 200, total loss: 0.5986, rpn_loss_cls: 0.2902, rpn_loss_box: 0.0489, loss_cls: 0.2148, loss_box: 0.0448, lr: 0.001000
+speed: 0.327s / iter
+iter: 70 / 200, total loss: 0.4218, rpn_loss_cls: 0.2642, rpn_loss_box: 0.0068, loss_cls: 0.1500, loss_box: 0.0008, lr: 0.001000
+speed: 0.314s / iter
+iter: 80 / 200, total loss: 2.2845, rpn_loss_cls: 0.2020, rpn_loss_box: 0.0380, loss_cls: 1.3946, loss_box: 0.6499, lr: 0.001000
+speed: 0.305s / iter
+iter: 90 / 200, total loss: 2.4582, rpn_loss_cls: 0.8847, rpn_loss_box: 0.1908, loss_cls: 1.0659, loss_box: 0.3169, lr: 0.001000
+speed: 0.314s / iter
+iter: 100 / 200, total loss: 1.4993, rpn_loss_cls: 0.1974, rpn_loss_box: 0.0220, loss_cls: 0.6275, loss_box: 0.6523, lr: 0.001000
+speed: 0.300s / iter
+iter: 110 / 200, total loss: 2.0404, rpn_loss_cls: 0.8333, rpn_loss_box: 0.2005, loss_cls: 0.7382, loss_box: 0.2684, lr: 0.001000
+speed: 0.312s / iter
+iter: 120 / 200, total loss: 2.7746, rpn_loss_cls: 0.6242, rpn_loss_box: 0.3316, loss_cls: 1.1961, loss_box: 0.6227, lr: 0.001000
+speed: 0.312s / iter
+iter: 130 / 200, total loss: 1.1827, rpn_loss_cls: 0.2053, rpn_loss_box: 0.0448, loss_cls: 0.5831, loss_box: 0.3496, lr: 0.001000
+speed: 0.307s / iter
+iter: 140 / 200, total loss: 1.4099, rpn_loss_cls: 0.1232, rpn_loss_box: 0.1182, loss_cls: 0.7079, loss_box: 0.4606, lr: 0.001000
+speed: 0.292s / iter
+iter: 150 / 200, total loss: 2.0879, rpn_loss_cls: 0.1740, rpn_loss_box: 0.0589, loss_cls: 1.1735, loss_box: 0.6815, lr: 0.001000
+speed: 0.291s / iter
+iter: 160 / 200, total loss: 0.6709, rpn_loss_cls: 0.3131, rpn_loss_box: 0.0122, loss_cls: 0.2570, loss_box: 0.0886, lr: 0.001000
+speed: 0.287s / iter
+iter: 170 / 200, total loss: 0.5938, rpn_loss_cls: 0.1960, rpn_loss_box: 0.0079, loss_cls: 0.2930, loss_box: 0.0968, lr: 0.001000
+speed: 0.284s / iter
+iter: 180 / 200, total loss: 2.2093, rpn_loss_cls: 0.9858, rpn_loss_box: 0.4631, loss_cls: 0.6614, loss_box: 0.0991, lr: 0.001000
+speed: 0.282s / iter
+iter: 190 / 200, total loss: 2.8107, rpn_loss_cls: 0.8121, rpn_loss_box: 0.1513, loss_cls: 1.2994, loss_box: 0.5480, lr: 0.001000
+speed: 0.273s / iter
+iter: 200 / 200, total loss: 3.8028, rpn_loss_cls: 0.9055, rpn_loss_box: 0.4698, loss_cls: 1.9256, loss_box: 0.5018, lr: 0.000100
+speed: 0.279s / iter
+WARNING:tensorflow:*******************************************************
+WARNING:tensorflow:TensorFlow's V1 checkpoint format has been deprecated.
+WARNING:tensorflow:Consider switching to the more efficient V2 format:
+WARNING:tensorflow:   `tf.train.Saver(write_version=tf.train.SaverDef.V2)`
+WARNING:tensorflow:now on by default.
+WARNING:tensorflow:*******************************************************
+Wrote snapshot to: /home/boot/ming/projects/Faster-RCNN_TF/output/faster_rcnn_end2end/voc_2007_trainval/VGGnet_fast_rcnn_iter_200.ckpt
+done solving
+
+real	1m15.702s
+user	0m55.843s
+sys	0m17.499s
++ set +x
++ python ./tools/test_net.py --device gpu --device_id 0 --weights /home/boot/ming/projects/Faster-RCNN_TF/output/faster_rcnn_end2end/voc_2007_trainval/VGGnet_fast_rcnn_iter_200.ckpt --imdb voc_2007_test --cfg experiments/cfgs/faster_rcnn_end2end.yml --network VGGnet_test
+voc_2007_train
+voc_2007_val
+voc_2007_trainval
+voc_2007_test
+kitti_train
+kitti_val
+kitti_trainval
+kitti_test
+nthu_71
+nthu_370
+Called with args:
+Namespace(cfg_file='experiments/cfgs/faster_rcnn_end2end.yml', comp_mode=False, device='gpu', device_id=0, imdb_name='voc_2007_test', model='/home/boot/ming/projects/Faster-RCNN_TF/output/faster_rcnn_end2end/voc_2007_trainval/VGGnet_fast_rcnn_iter_200.ckpt', network_name='VGGnet_test', prototxt=None, wait=True)
+Using config:
+{'DATA_DIR': '/home/boot/ming/projects/Faster-RCNN_TF/data',
+ 'DEDUP_BOXES': 0.0625,
+ 'EPS': 1e-14,
+ 'EXP_DIR': 'faster_rcnn_end2end',
+ 'GPU_ID': 0,
+ 'IS_MULTISCALE': False,
+ 'MATLAB': 'matlab',
+ 'MODELS_DIR': '/home/boot/ming/projects/Faster-RCNN_TF/models/pascal_voc',
+ 'PIXEL_MEANS': array([[[102.9801, 115.9465, 122.7717]]]),
+ 'RNG_SEED': 3,
+ 'ROOT_DIR': '/home/boot/ming/projects/Faster-RCNN_TF',
+ 'TEST': {'BBOX_REG': True,
+          'DEBUG_TIMELINE': False,
+          'HAS_RPN': True,
+          'MAX_SIZE': 1000,
+          'NMS': 0.3,
+          'PROPOSAL_METHOD': 'selective_search',
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000,
+          'SCALES': [600],
+          'SVM': False},
+ 'TRAIN': {'ASPECT_GROUPING': True,
+           'BATCH_SIZE': 128,
+           'BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'BBOX_NORMALIZE_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZE_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_NORMALIZE_TARGETS': True,
+           'BBOX_NORMALIZE_TARGETS_PRECOMPUTED': True,
+           'BBOX_REG': True,
+           'BBOX_THRESH': 0.5,
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'DEBUG_TIMELINE': False,
+           'DISPLAY': 10,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'GAMMA': 0.1,
+           'HAS_RPN': True,
+           'IMS_PER_BATCH': 1,
+           'LEARNING_RATE': 0.001,
+           'MAX_SIZE': 1000,
+           'MOMENTUM': 0.9,
+           'PROPOSAL_METHOD': 'gt',
+           'RPN_BATCHSIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000,
+           'SCALES': [600],
+           'SNAPSHOT_INFIX': '',
+           'SNAPSHOT_ITERS': 200,
+           'SNAPSHOT_PREFIX': 'VGGnet_fast_rcnn',
+           'STEPSIZE': 200,
+           'USE_FLIPPED': True,
+           'USE_PREFETCH': False},
+ 'USE_GPU_NMS': True}
+<bound method imdb.default_roidb of <datasets.pascal_voc.pascal_voc object at 0x7fbcd653d2e8>>
+/gpu:0
+Tensor("Placeholder:0", shape=(?, ?, ?, 3), dtype=float32)
+Tensor("conv5_3/conv5_3:0", shape=(?, ?, ?, 512), dtype=float32)
+Tensor("rpn_conv/3x3/rpn_conv/3x3:0", shape=(?, ?, ?, 512), dtype=float32)
+Tensor("rpn_cls_score/rpn_cls_score:0", shape=(?, ?, ?, 18), dtype=float32)
+Tensor("rpn_cls_prob:0", shape=(?, ?, ?, ?), dtype=float32)
+Tensor("rpn_cls_prob_reshape:0", shape=(?, ?, ?, 18), dtype=float32)
+Tensor("rpn_bbox_pred/rpn_bbox_pred:0", shape=(?, ?, ?, 36), dtype=float32)
+Tensor("Placeholder_1:0", shape=(?, 3), dtype=float32)
+Tensor("conv5_3/conv5_3:0", shape=(?, ?, ?, 512), dtype=float32)
+Tensor("rois:0", shape=(?, 5), dtype=float32)
+[<tf.Tensor 'conv5_3/conv5_3:0' shape=(?, ?, ?, 512) dtype=float32>, <tf.Tensor 'rois:0' shape=(?, 5) dtype=float32>]
+Tensor("fc7/fc7:0", shape=(?, 4096), dtype=float32)
+Use network `VGGnet_test` in training
+2020-03-11 08:48:44.171508: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-03-11 08:48:44.246799: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:964] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2020-03-11 08:48:44.247151: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1411] Found device 0 with properties: 
+name: GeForce GTX 1080 Ti major: 6 minor: 1 memoryClockRate(GHz): 1.6325
+pciBusID: 0000:01:00.0
+totalMemory: 10.91GiB freeMemory: 10.09GiB
+2020-03-11 08:48:44.247164: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1490] Adding visible gpu devices: 0
+2020-03-11 08:48:44.440918: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-03-11 08:48:44.440954: I tensorflow/core/common_runtime/gpu/gpu_device.cc:977]      0 
+2020-03-11 08:48:44.440960: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990] 0:   N 
+2020-03-11 08:48:44.441130: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1103] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 9757 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1080 Ti, pci bus id: 0000:01:00.0, compute capability: 6.1)
+Loading model weights from /home/boot/ming/projects/Faster-RCNN_TF/output/faster_rcnn_end2end/voc_2007_trainval/VGGnet_fast_rcnn_iter_200.ckpt
+im_detect: 1/4952 1.207s 0.001s
+im_detect: 2/4952 0.886s 0.001s
+im_detect: 3/4952 0.762s 0.001s
+im_detect: 4/4952 0.707s 0.001s
+im_detect: 5/4952 0.588s 0.001s
+im_detect: 6/4952 0.500s 0.001s
+im_detect: 7/4952 0.503s 0.001s
+im_detect: 8/4952 0.511s 0.001s
+im_detect: 9/4952 0.461s 0.001s
+im_detect: 10/4952 0.471s 0.001s
+im_detect: 11/4952 0.433s 0.001s
+im_detect: 12/4952 0.401s 0.001s
+im_detect: 13/4952 0.410s 0.001s
+im_detect: 14/4952 0.385s 0.001s
+im_detect: 15/4952 0.391s 0.001s
+im_detect: 16/4952 0.396s 0.001s
+im_detect: 17/4952 0.389s 0.001s
+im_detect: 18/4952 0.389s 0.001s
+im_detect: 19/4952 0.372s 0.001s
+im_detect: 20/4952 0.356s 0.001s
+im_detect: 21/4952 0.341s 0.001s
+im_detect: 22/4952 0.344s 0.001s
+im_detect: 23/4952 0.331s 0.001s
+im_detect: 24/4952 0.340s 0.001s
+im_detect: 25/4952 0.328s 0.001s
+im_detect: 26/4952 0.318s 0.001s
+im_detect: 27/4952 0.308s 0.001s
+im_detect: 28/4952 0.307s 0.001s
+im_detect: 29/4952 0.298s 0.001s
+im_detect: 30/4952 0.290s 0.001s
+im_detect: 31/4952 0.282s 0.001s
+im_detect: 32/4952 0.275s 0.001s
+im_detect: 33/4952 0.285s 0.001s
+im_detect: 34/4952 0.278s 0.001s
+im_detect: 35/4952 0.271s 0.001s
+im_detect: 36/4952 0.265s 0.001s
+im_detect: 37/4952 0.260s 0.001s
+im_detect: 38/4952 0.254s 0.001s
+im_detect: 39/4952 0.261s 0.001s
+im_detect: 40/4952 0.256s 0.001s
+im_detect: 41/4952 0.256s 0.001s
